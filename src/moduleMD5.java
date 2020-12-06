@@ -73,12 +73,4 @@ public class moduleMD5 {
         return md.digest();
 
     }
-
-	// Driver code 
-	public static void main(String args[]) throws NoSuchAlgorithmException 
-	{ 
-        String s = "Geeksfoegeeks";
-        String encr = encryptMD5(s);
-        System.out.println("Your Hash MD5 is: " + encr); 
-	} 
 } 
