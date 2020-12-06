@@ -4,7 +4,7 @@ import java.math.BigInteger;
 import java.security.MessageDigest; 
 import java.security.NoSuchAlgorithmException; 
 
-public class moduleSHA512 { 
+public class SHA512System { 
 	public static String encryptSHA512(String input) 
 	{ 
 		try { 

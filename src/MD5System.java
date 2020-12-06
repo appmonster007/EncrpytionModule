@@ -2,16 +2,17 @@ import java.io.FileInputStream;
 import java.io.IOException;
 import java.io.InputStream;
 import java.math.BigInteger;
+import java.nio.charset.StandardCharsets;
 import java.security.DigestInputStream;
 import java.security.MessageDigest;
 import java.security.NoSuchAlgorithmException;
 import java.security.SecureRandom;
 
 // Java program to calculate MD5 hash value 
-public class moduleMD5 {
-    public static String addSalt(String input, String salt)
+public class MD5System {
+    public static String addSalt(String input, String salt) throws NoSuchAlgorithmException
     {
-        return input+salt;
+        return input+salt + new String(MD5System.getSalt(), StandardCharsets.UTF_8);
     }
     public static String encryptMD5(String input) 
 	{ 
