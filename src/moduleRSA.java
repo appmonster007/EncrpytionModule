@@ -25,11 +25,11 @@ public class moduleRSA {
     public moduleRSA(
         RSAPrivateKey privateKey,
         RSAPublicKey publicKey,
-        int keySiz
+        int keySize
     ) throws NoSuchAlgorithmException {
         this.privateKey = privateKey;
         this.publicKey = publicKey;
-        this.keySize = keySiz;
+        this.keySize = keySize;
     }
 
     public moduleRSA(int keySize) throws NoSuchAlgorithmException {
