@@ -80,7 +80,5 @@ public class moduleMD5 {
         String s = "Geeksfoegeeks";
         String encr = encryptMD5(s);
         System.out.println("Your Hash MD5 is: " + encr); 
-        String decrp = decryptMD5(encr);
-		System.out.println("Your decr MD5 is: " + decrp); 
 	} 
 } 
