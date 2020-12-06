@@ -1,3 +1,4 @@
+package cryptoModules;
 
 // import java.util.Base64;
 import java.io.File;
@@ -6,11 +7,11 @@ import java.io.FileWriter;
 import java.io.IOException;
 // import java.lang.reflect.Method;
 import java.math.BigInteger;
-import java.security.*;
-import java.nio.charset.StandardCharsets;
+import java.security.KeyFactory;
 import java.security.KeyPair;
 import java.security.KeyPairGenerator;
 import java.security.NoSuchAlgorithmException;
+import java.security.PrivateKey;
 import java.security.interfaces.RSAPrivateKey;
 import java.security.interfaces.RSAPublicKey;
 import java.security.spec.InvalidKeySpecException;
@@ -107,32 +108,5 @@ public class RSASystem {
         privKey = keyFactory.generatePrivate((KeySpec) new PKCS8EncodedKeySpec(key));
         rsaKey = (RSAPrivateKey) privKey;
         return (new BigInteger(message)).modPow(rsaKey.getPrivateExponent(), rsaKey.getModulus()).toByteArray();
-    }
-
-    public static void main(String[] args) throws NoSuchAlgorithmException, IOException {
-        RSASystem keyPairGenerator = new RSASystem();
-        // keyPairGenerator.writeToFile("RSA/publicKey.cert",
-        // keyPairGenerator.getPublicKey().getEncoded());
-        // keyPairGenerator.writeToFile("RSA/privateKey.cert",
-        // keyPairGenerator.getPrivateKey().getEncoded());
-        System.out.println(Base64.getEncoder().encodeToString(keyPairGenerator.getPublicKey().getEncoded()));
-        System.out.println(keyPairGenerator.getPublicKey());
-        System.out.println();
-        System.out.println(keyPairGenerator.getPrivateKey().getEncoded());
-        System.out.println(keyPairGenerator.getPublicKey().getModulus());
-        System.out.println();
-        System.out.println(keyPairGenerator.getPublicKey().getPublicExponent());
-
-        System.out.println();
-        byte[] enr = keyPairGenerator.encryptMessage("hello");
-        byte[] dec = keyPairGenerator.decryptMessage(enr);
-        System.out.println(new String(dec, StandardCharsets.UTF_8));
-        byte[] deec;
-        try {
-            deec = RSASystem.decryptMessage(enr, keyPairGenerator.getPrivateKey().getEncoded());
-            System.out.println(new String(deec, StandardCharsets.UTF_8));
-        } catch (InvalidKeySpecException e) {
-            e.printStackTrace();
-        }
     }
 }

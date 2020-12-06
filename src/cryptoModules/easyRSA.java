@@ -1,7 +1,7 @@
-import java.io.IOException;
+package cryptoModules;
+
 import java.math.BigInteger;
 import java.util.Random;
-import java.util.Scanner;
 
 public class easyRSA {
     private BigInteger P;
@@ -17,9 +17,9 @@ public class easyRSA {
     {
         R = new Random();
         P = BigInteger.probablePrime(maxLength, R);
-         Q = BigInteger.probablePrime(maxLength, R);
+        Q = BigInteger.probablePrime(maxLength, R);
         N = P.multiply(Q);
-       PHI = P.subtract(BigInteger.ONE).multiply(  Q.subtract(BigInteger.ONE));
+        PHI = P.subtract(BigInteger.ONE).multiply(  Q.subtract(BigInteger.ONE));
         e = BigInteger.probablePrime(maxLength / 2, R);
         while (PHI.gcd(e).compareTo(BigInteger.ONE) > 0 && e.compareTo(PHI) < 0)
         {
@@ -28,6 +28,20 @@ public class easyRSA {
         d = e.modInverse(PHI);
     }
  
+    public void setPQe(BigInteger P, BigInteger Q, BigInteger e)
+    {
+        this.P = P;
+        this.Q = Q;
+        this.e = e;
+        this.N = P.multiply(Q);
+        PHI = P.subtract(BigInteger.ONE).multiply(  Q.subtract(BigInteger.ONE));
+        while (PHI.gcd(e).compareTo(BigInteger.ONE) > 0 && e.compareTo(PHI) < 0)
+        {
+            e.add(BigInteger.ONE);
+        }
+        d = e.modInverse(PHI);
+    }
+    
     public easyRSA(BigInteger e, BigInteger d, BigInteger N)
     {
         this.e = e;
@@ -35,7 +49,7 @@ public class easyRSA {
         this.N = N;
     }
  
-    private static String bToS(byte[] cipher)
+    public static String bToS(byte[] cipher)
     {
         String temp = "";
         for (byte b : cipher)
@@ -55,25 +69,5 @@ public class easyRSA {
     public byte[] decryptMessage(byte[] message)
     {
         return (new BigInteger(message)).modPow(d, N).toByteArray();
-    }
-
-    public static void main (String [] arguments) throws IOException
-    {
-        easyRSA rsa = new easyRSA();
-        Scanner input = new Scanner(System.in);
-        String inputString;
-        System.out.println("Enter message you wish to send.");
-        inputString = input.nextLine();
-        System.out.println("Encrypting the message: " + inputString);
-        System.out.println("The message in bytes is:: "
-                + bToS(inputString.getBytes()));
-        // encryption
-        byte[] cipher = rsa.encryptMessage(inputString.getBytes());
-        // decryption
-        byte[] plain = rsa.decryptMessage(cipher);
-        System.out.println("Decrypting Bytes: " + bToS(plain));
-        System.out.println("Plain message is: " + new String(plain));
-        input.close();
-    }
- 
+    } 
 }

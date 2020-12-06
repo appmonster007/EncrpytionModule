@@ -1,3 +1,5 @@
+package cryptoModules;
+
 import java.io.FileInputStream;
 import java.io.IOException;
 import java.io.InputStream;
@@ -55,7 +57,7 @@ public class MD5System {
         return salt;
 }
 
-    private static byte[] checksum(String filePath) {
+    public static byte[] checksum(String filePath) {
 
         MessageDigest md;
         try {

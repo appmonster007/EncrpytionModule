@@ -1,4 +1,4 @@
-// Java program to calculate SHA-512 hash value 
+package cryptoModules;
 
 import java.math.BigInteger; 
 import java.security.MessageDigest; 
