@@ -21,6 +21,16 @@ public class moduleRSA {
         this.privateKey = (RSAPrivateKey)pair.getPrivate();
         this.publicKey = (RSAPublicKey)pair.getPublic();
     }
+    
+    public moduleRSA(
+        RSAPrivateKey privateKey,
+        RSAPublicKey publicKey,
+        int keySiz
+    ) throws NoSuchAlgorithmException {
+        this.privateKey = privateKey;
+        this.publicKey = publicKey;
+        this.keySize = keySiz;
+    }
 
     public moduleRSA(int keySize) throws NoSuchAlgorithmException {
         KeyPairGenerator keyGen = KeyPairGenerator.getInstance("RSA");
