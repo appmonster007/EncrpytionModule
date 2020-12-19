@@ -8,28 +8,37 @@ import javax.swing.JFrame;
 import javax.swing.JPanel;
 
 public class guiView{
-    private JPanel controlPanel;
-    private JFrame mainView;
-    public void prepareGUI(){
-        mainView = new JFrame("Crpyto-Hasher");
+    private JPanel controlPanel = new JPanel();
+    private JFrame mainView = new JFrame("Crpyto-Hasher");
+
+
+    public void prepareMainGUI(){
+
         mainView.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-        mainView.setSize(1024, 1024);
-        mainView.setLayout(new GridLayout(1, 1));
-        controlPanel = new JPanel();
-        controlPanel.setLayout(new GridLayout(5, 5));
-        JButton button = new JButton("Press");
-        JTextField tf1 = new JTextField(100);
-        JTextField tf2 = new JTextField(100);
-        controlPanel.add(button);
-        controlPanel.add(tf1);
-        controlPanel.add(tf2);
-        controlPanel.add(new JPanel());
+        mainView.setSize(512, 512);
+        // mainView.setLayout(new GridLayout(1, 1));
+
+        JButton rsaButton = new JButton("RSA Encrypt/Decrypt");
+        controlPanel.add(rsaButton);
+
+        // controlPanel.add(new JPanel());s
         mainView.getContentPane().add(controlPanel);
+        // mainView.getContentPane().add(rsaView);
         mainView.setVisible(true);
+        rsaButton.addMouseListener(new java.awt.event.MouseAdapter() 
+        {
+            @Override
+            public void mousePressed(java.awt.event.MouseEvent evt) 
+            {
+                mainView.setVisible(false);
+                new rsaView();
+            }
+        });
+
     }
 
     public guiView(){
-       prepareGUI();
+       prepareMainGUI();
     }
 
     public static void main (String [] args){
