@@ -14,48 +14,49 @@ import java.security.NoSuchAlgorithmException;
 import java.security.spec.InvalidKeySpecException;
 import java.util.Base64;
 
-public class encryptGui {
+public class setKeyGui {
 
     private JFrame mainView = new JFrame("RSA-Encypt-Decrypt");
     private JPanel encryptorPanel = new JPanel();
-    private JLabel keyJLabel = new JLabel();
-    private JLabel textJLabel = new JLabel();
-    private JTextField Key = new JTextField(2048);
-    private JTextField text = new JTextField(2048);
-    private JTextField output = new JTextField(2048);
-    private JButton encryptText = new JButton("Encrypt Text");
+    private JLabel publicKeyJLabel = new JLabel();
+    private JLabel privateKeyJLabel = new JLabel();
+    private JTextField publicKey = new JTextField(2048);
+    private JTextField privateKey = new JTextField(2048);
+    private JButton encryptText = new JButton("Set Keys");
     private JButton back = new JButton("Go Back");
 
-    public encryptGui() {
+    public setKeyGui() {
         mainView.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         // mainView.setSize(512, 256);
         // mainView.setLayout(new GridLayout(1, 1));
 
-        keyJLabel.setText("Public Key: ");
-        textJLabel.setText("Message: ");
+        publicKeyJLabel.setText("Public Key: ");
+        privateKeyJLabel.setText("Private Key: ");
         encryptorPanel.setLayout(new GridLayout(4, 3));
-        encryptorPanel.add(keyJLabel);
-        encryptorPanel.add(Key);
-        encryptorPanel.add(textJLabel);
-        encryptorPanel.add(text);
+        encryptorPanel.add(publicKeyJLabel);
+        encryptorPanel.add(publicKey);
+        encryptorPanel.add(privateKeyJLabel);
+        encryptorPanel.add(privateKey);
         encryptorPanel.add(encryptText);
-        encryptorPanel.add(output);
         encryptorPanel.add(back);
 
+        mainView.setSize(512, 512);
         mainView.add(encryptorPanel);
         mainView.setVisible(true);
         encryptText.addMouseListener(new java.awt.event.MouseAdapter() {
             @Override
             public void mousePressed(java.awt.event.MouseEvent evt) {
-                String publicKey = (Key.getText()).replaceAll("\\s", "");
-                String textMessage = text.getText();
+                String publicKeytext = (publicKey.getText()).replaceAll("\\s", "");
+                String privateKeytext = privateKey.getText();
                 try {
-                    String encryptedText = new String(Base64.getEncoder().encode(RSASystem.encryptMessage(publicKey, textMessage)), StandardCharsets.UTF_8);
-                    output.setText(encryptedText);
-                } catch (InvalidKeySpecException | NoSuchAlgorithmException e) {
+                    RSASystem keys = new RSASystem(publicKeytext, privateKeytext);
+                    new encryptDecryptGui(keys);
+
+                } catch (InvalidKeySpecException e) {
+                    e.printStackTrace();
+                } catch (NoSuchAlgorithmException e) {
                     e.printStackTrace();
                 }
-
             }
         });
 
@@ -70,4 +71,5 @@ public class encryptGui {
             }
         });
     }
+    
 }

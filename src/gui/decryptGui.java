@@ -16,7 +16,7 @@ import java.util.Base64;
 
 public class decryptGui {
 
-    private JFrame mainView = new JFrame("RSA-Encypt-Decrypt");
+    private JFrame mainView = new JFrame("RSA-Encrypt-Decrypt");
     private JPanel decryptorPanel = new JPanel();
     private JLabel keyJLabel = new JLabel();
     private JLabel textJLabel = new JLabel();
@@ -28,7 +28,7 @@ public class decryptGui {
 
     public decryptGui() {
         mainView.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-        mainView.setSize(512, 256);
+        // mainView.setSize(512, 256);
         // mainView.setLayout(new GridLayout(1, 1));
 
         keyJLabel.setText("Private Key: ");

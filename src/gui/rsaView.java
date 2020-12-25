@@ -13,6 +13,7 @@ public class rsaView {
     private JButton createKeyPair = new JButton("Create Key Pair");
     private JButton Encrpytor = new JButton("Encrypt text");
     private JButton Decrpytor = new JButton("Decrypt text");
+    private JButton setPair = new JButton("Set Key Pair");
 
     public rsaView () {
         mainView.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
@@ -23,6 +24,7 @@ public class rsaView {
         rsaView.add(createKeyPair);
         rsaView.add(Encrpytor);
         rsaView.add(Decrpytor);
+        rsaView.add(setPair);
 
         mainView.add(rsaView);
         mainView.setVisible(true);
@@ -53,6 +55,16 @@ public class rsaView {
             {
                 mainView.setVisible(false);
                 new decryptGui();
+            }
+        });
+
+        setPair.addMouseListener(new java.awt.event.MouseAdapter() 
+        {
+            @Override
+            public void mousePressed(java.awt.event.MouseEvent evt) 
+            {
+                mainView.setVisible(false);
+                new setKeyGui();
             }
         });
     }

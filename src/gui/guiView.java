@@ -16,7 +16,9 @@ public class guiView{
 
         mainView.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         mainView.setSize(512, 512);
-        // mainView.setLayout(new GridLayout(1, 1));
+        mainView.setLayout(new GridLayout(1, 1));
+        controlPanel.setLayout(new GridLayout(1, 1));
+
 
         JButton rsaButton = new JButton("RSA Encrypt/Decrypt");
         controlPanel.add(rsaButton);

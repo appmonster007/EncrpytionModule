@@ -30,6 +30,33 @@ public class RSASystem {
 
     public RSASystem(){
     }
+    
+    public RSASystem(String publickeyString, String privatekeyString) throws InvalidKeySpecException,
+            NoSuchAlgorithmException {
+        if(publickeyString != ""){
+            KeyFactory keyFactory;
+            PublicKey publicKey;
+            RSAPublicKey rsaKey;
+            Base64.Decoder decoder = Base64.getDecoder();  
+            byte[] key = decoder.decode(publickeyString);  
+            keyFactory = KeyFactory.getInstance("RSA");
+
+            publicKey = keyFactory.generatePublic((KeySpec) new X509EncodedKeySpec(key));
+            rsaKey = (RSAPublicKey) publicKey;
+
+            this.publicKey = rsaKey;
+        }
+
+        if(privatekeyString != ""){
+            KeyFactory keyFactory;
+            PrivateKey privKey;
+            RSAPrivateKey rsaKey;
+            keyFactory = KeyFactory.getInstance("RSA");
+            privKey = keyFactory.generatePrivate((KeySpec) new PKCS8EncodedKeySpec(privatekeyString.getBytes()));
+            rsaKey = (RSAPrivateKey) privKey;
+            this.privateKey = rsaKey;       
+        }
+    }
 
     public void makeKey() throws NoSuchAlgorithmException {
         KeyPairGenerator keyGen = KeyPairGenerator.getInstance("RSA");
